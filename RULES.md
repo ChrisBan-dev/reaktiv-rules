@@ -124,6 +124,14 @@ Jede Loesung orientiert sich am Stand der Technik fuehrender Software-Unternehme
 - Skalierbarkeit mitdenken: Wuerde diese Loesung bei 100x Last noch funktionieren?
 - Keine zirkulaeren Abhaengigkeiten zwischen Modulen
 
+### Single Source of Truth (SSOT)
+- **Jede Mutation** ueber einen zentralen Store (z.B. `ticketStore`), nie direkt auf dem Array/Objekt
+- **Jedes Rendering** ueber zentrale Helper-Funktionen, nie HTML-Templates inline duplizieren
+- **Jedes Event** ueber den Event-Bus, nie direkte Render-Aufrufe nach Mutationen
+- **Jeder Fallback-Text** als benannte Konstante, nie als String-Literal an der Stelle
+- **Ganzheitlich migrieren, nicht in Silos:** Bei Refactorings ALLE Stellen finden — auch abweichende Schreibweisen, Sonderzeichen-Varianten, Legacy-Strings. Nach jeder Migration Gegen-Grep mit allen Varianten. Eine Migration ist erst fertig wenn der Grep ZERO Inline-Stellen findet.
+- **Dynamisch verifizieren:** Nicht die Anzahl geplanter Stellen abzaehlen, sondern das Ergebnis messen. Grep-Verifikation ist Pflicht nach jeder SSOT-Migration.
+
 ### Fehlerbehandlung
 - Jeder externe Call (API, DB, Filesystem) hat explizites Error-Handling
 - Fehler werden geloggt mit Kontext: was wurde versucht, welcher Input, welcher Fehler
