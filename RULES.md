@@ -5,6 +5,38 @@
 
 ---
 
+## Master-Checklist (vor jeder Ausgabe zwingend)
+
+> Konsolidierte Pruefpflicht aus allen Abschnitten. Kein "fertig" ohne gruene Liste.
+
+### DSGVO (→ Details: Abschnitt "DSGVO-Regeln")
+- [ ] Keine PII in Logs, Fehlermeldungen oder Konsolenausgaben?
+- [ ] Keine externen Dienste ohne AVV eingebunden?
+- [ ] Keine Daten ausserhalb der EU gespeichert oder uebertragen?
+- [ ] PII-Felder verschluesselt (at rest)?
+
+### IT-Sicherheit (→ Details: Abschnitt "IT-Sicherheit")
+- [ ] Alle Eingaben validiert, alle Outputs encoded (XSS/Injection)?
+- [ ] SQL: ausschliesslich Prepared Statements (kein String-Concat)?
+- [ ] Keine Secrets im Code, Git oder Logs?
+- [ ] Alle neuen Endpoints authentifiziert und rate-limited?
+- [ ] Keine Fehlermeldungen mit internen Details (Stack-Traces, Pfade)?
+- [ ] Principle of Least Privilege eingehalten?
+
+### Referenzen & Konsistenz (→ Details: Abschnitt "Verifikationspflicht")
+- [ ] Alle referenzierten Dateien, Module, Funktionen existieren tatsaechlich?
+- [ ] Import-Pfade gegen reale Dateistruktur abgeglichen?
+- [ ] Neue Pakete in package.json, neue Env-Vars in .env.example dokumentiert?
+- [ ] Code konsistent mit bestehenden Projekt-Konventionen?
+
+### UI / Corporate Design (→ Details: Abschnitt "Corporate Design")
+- [ ] Ausschliesslich Farben aus der Reaktiv-Palette?
+- [ ] Schriftart Helvetica Neue (kein Phenomena, kein System-Font ohne Fallback)?
+- [ ] Icons: Outlines (keine Solid-Icons), keine Farbverlaeufe?
+- [ ] Farbflaechen full-width (keine freistehenden farbigen Boxen)?
+
+---
+
 ## DSGVO-Regeln (verbindlich für alle generierten Code-Aenderungen)
 
 ### Datenspeicherung & Uebertragung
@@ -33,11 +65,7 @@
 - Alle neuen Datenbankmodelle muessen ein `created_at`-Feld enthalten (Vorbereitung fuer Loeschlogik)
 
 ### DSGVO-Pruefpflicht
-Vor jeder Ausgabe pruefen:
-- [ ] Enthaelt der Code keine PII in Logs oder Fehlermeldungen?
-- [ ] Werden externe Dienste ohne AVV eingebunden?
-- [ ] Werden Daten ausserhalb der EU gespeichert oder uebertragen?
-- [ ] Gibt es Felder mit PII ohne Verschluesselung?
+→ Siehe **Master-Checklist** am Anfang dieser Datei (Abschnitt "DSGVO").
 
 ---
 
@@ -93,13 +121,7 @@ Vor jeder Ausgabe pruefen:
 - Kein eval(), keine SQL-String-Konkatenation, kein unsicheres Deserialisieren
 
 ### IT-Sicherheits-Pruefpflicht
-Vor jeder Ausgabe pruefen:
-- [ ] Sind alle Eingaben validiert und Outputs encoded?
-- [ ] Werden Prepared Statements verwendet (kein SQL-Concat)?
-- [ ] Sind Secrets aus dem Code herausgehalten?
-- [ ] Sind alle neuen Endpoints authentifiziert und rate-limited?
-- [ ] Gibt es Fehlermeldungen, die interne Details leaken?
-- [ ] Hat die Komponente nur die minimal notwendigen Rechte?
+→ Siehe **Master-Checklist** am Anfang dieser Datei (Abschnitt "IT-Sicherheit").
 
 ---
 
@@ -148,23 +170,13 @@ Jede Loesung orientiert sich am Stand der Technik fuehrender Software-Unternehme
 
 ## Verifikationspflicht (vor jeder Ausgabe zwingend)
 
-Claude fuehrt keinen Code aus — er liest ihn nur. Deshalb muss vor jeder Ausgabe manuell gegen die tatsaechliche Projektstruktur geprueft werden:
+→ Siehe **Master-Checklist** am Anfang dieser Datei (Abschnitt "Referenzen & Konsistenz").
 
-### Referenzen & Verlinkungen
-- [ ] Existieren alle referenzierten Dateien, Module und Funktionen tatsaechlich?
-- [ ] Sind alle Import-Pfade gegen die reale Dateistruktur abgeglichen?
-- [ ] Sind alle internen Routen und Links auf Existenz geprueft?
-- [ ] Wurden hardcodierte externe URLs als "manuell zu pruefen" markiert?
-
-### Abhaengigkeiten & Konfiguration
-- [ ] Sind neue Pakete in package.json / requirements.txt eingetragen?
-- [ ] Sind alle neu verwendeten Umgebungsvariablen in .env.example dokumentiert?
-- [ ] Sind keine Versions-Konflikte mit bestehenden Abhaengigkeiten entstanden?
-
-### Konsistenz
-- [ ] Ist der neue Code konsistent mit den Konventionen des restlichen Projekts?
-- [ ] Wurden keine bestehenden Schnittstellen stillschweigend veraendert?
-- [ ] Sind alle TODO-Kommentare mit Kontext und Loesungsrichtung versehen?
+Zusaetzlich beachten:
+- Alle internen Routen und Links auf Existenz pruefen
+- Hardcodierte externe URLs als "manuell zu pruefen" markieren
+- Keine bestehenden Schnittstellen stillschweigend veraendern
+- Alle TODO-Kommentare mit Kontext und Loesungsrichtung versehen
 
 ---
 
@@ -303,12 +315,7 @@ Karten & Container:
 - Runde Ecken konsequent einsetzen
 
 ### Pruefpflicht UI
-Vor jeder Ausgabe pruefen:
-- [ ] Werden ausschliesslich Farben aus der reaktiv-Palette verwendet?
-- [ ] Ist die Schriftart Helvetica Neue (kein Phenomena, kein System-Font ohne Fallback)?
-- [ ] Sind Icons Outlines (keine Solid-Icons)?
-- [ ] Sind Farbflaechen full-width (keine freistehenden farbigen Boxen)?
-- [ ] Keine Farbverlaeufe (Gradients) verwendet?
+→ Siehe **Master-Checklist** am Anfang dieser Datei (Abschnitt "UI / Corporate Design").
 
 ---
 
