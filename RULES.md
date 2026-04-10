@@ -120,6 +120,18 @@
 - Debug-Endpoints und Test-Routen niemals in Produktion deployen
 - Kein eval(), keine SQL-String-Konkatenation, kein unsicheres Deserialisieren
 
+### CI/CD-Sicherheit & Deployment
+- Pre-Commit-Hooks aktiv halten: Secret-Scanning (gitleaks o.ae.) muss vor jedem Commit laufen
+- Keine Secrets in GitHub Actions Logs: Secrets nur ueber `${{ secrets.* }}` referenzieren, nie als Klartext in Workflow-Dateien
+- Pipeline-Haertung: `npm ci` statt `npm install` (deterministischer Build), Lock-File committen
+- Keine `--no-verify`-Flags in Commits oder Pushes (umgeht Sicherheits-Hooks)
+- Deployment nur ueber CI/CD-Pipeline, kein manuelles `az` / `func` auf Produktion
+- Staging vor Produktion: Aenderungen zuerst auf Staging verifizieren, wenn verfuegbar
+- Artifact-basiertes Deployment: einmal bauen, ueberall deployen (kein doppeltes Build)
+- Coverage-Schwelle in CI erzwingen: neue Features duerfen die Gesamt-Coverage nicht senken
+- Dependency-Audit: `npm audit` in CI als Gate (min. `--audit-level=high`)
+- Keine selbst-geschriebenen Krypto-Funktionen in der Pipeline (z.B. Token-Generierung)
+
 ### IT-Sicherheits-Pruefpflicht
 → Siehe **Master-Checklist** am Anfang dieser Datei (Abschnitt "IT-Sicherheit").
 
